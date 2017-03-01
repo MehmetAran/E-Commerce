@@ -21,10 +21,8 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client findByUsername(String username) {
-        List<Client> clients = clientRepository.findByUsername(username);
-        if(clients.isEmpty())
-            throw new ClientExistsException("Client with " +  username + " exists!");
-        return clients.get(0);
+        System.out.println("USERI " + username);
+        return clientRepository.findByUsername(username);
     }
 
     @Override
@@ -43,8 +41,8 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client save(Client c) {
-        if (clientRepository.findByUsername(c.getUsername()).isEmpty())
-            throw new ClientDoesNotExistException("Client: " + c.getId() + " does not exists!");
+//        if (clientRepository.findByUsername(c.getUsername()).isEmpty())
+//            throw new ClientDoesNotExistException("Client: " + c.getId() + " does not exists!");
         return clientRepository.save(c);
     }
 

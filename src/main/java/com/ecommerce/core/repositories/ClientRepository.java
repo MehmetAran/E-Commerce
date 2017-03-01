@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClientRepository extends CrudRepository<Client, Long>{
 
-    public List<Client> findByUsername(String username);
+    public Client findByUsername(String username);
     public List<Client> findAll();
     public void delete(Long id);
     public Client save(Client c);

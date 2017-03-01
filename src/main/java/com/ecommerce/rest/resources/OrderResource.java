@@ -1,8 +1,6 @@
 package com.ecommerce.rest.resources;
 
-import com.ecommerce.core.entities.Client;
 import com.ecommerce.core.entities.Order;
-import com.ecommerce.rest.util.ProductSet;
 import org.springframework.hateoas.ResourceSupport;
 
 import java.util.Date;

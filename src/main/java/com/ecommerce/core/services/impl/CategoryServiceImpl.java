@@ -34,4 +34,11 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findByName(String name) {
         return categoryRepository.findByName(name);
     }
+
+    @Override
+    public Category update(String name, Category newCategory) {
+        Long id = categoryRepository.findByName(name).getId();
+        newCategory.setId(id);
+        return categoryRepository.save(newCategory);
+    }
 }
