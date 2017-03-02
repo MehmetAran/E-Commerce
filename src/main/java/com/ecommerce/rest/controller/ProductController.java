@@ -1,9 +1,10 @@
 package com.ecommerce.rest.controller;
 
 import com.ecommerce.core.entities.Product;
-import com.ecommerce.core.exceptions.ProductDoesNotExistException;
+import com.ecommerce.core.exceptions.ProductNotFoundException;
 import com.ecommerce.core.services.ProductService;
 import com.ecommerce.rest.exceptions.ConflictException;
+import com.ecommerce.rest.exceptions.NotFoundException;
 import com.ecommerce.rest.resources.ProductResource;
 import com.ecommerce.rest.resources.asm.ProductResourceAsm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,13 @@ public class ProductController {
             Product p = productService.findOne(id);
             resource = new ProductResourceAsm().toResource(p);
         }
-        catch (ProductDoesNotExistException e){
-            throw new ConflictException(e.getMessage());
+        catch (ProductNotFoundException e){
+            throw new NotFoundException(e.getMessage());
         }
 
         return new ResponseEntity<ProductResource>(resource, HttpStatus.OK);
     }
+
+    // TODO: 3/2/2017 addProduct()
 
 }

@@ -1,9 +1,8 @@
 package com.ecommerce.core.services.impl;
 
 import com.ecommerce.core.entities.Product;
-import com.ecommerce.core.exceptions.ProductDoesNotExistException;
+import com.ecommerce.core.exceptions.ProductNotFoundException;
 import com.ecommerce.core.repositories.ProductRepository;
-import com.ecommerce.core.services.ProducerService;
 import com.ecommerce.core.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class ProductImpl implements ProductService{
     public Product findByName(String name) {
         List<Product> p = productRepository.findByName(name);
         if(p.isEmpty())
-            throw new ProductDoesNotExistException("Product " + name + " does not exists!");
+            throw new ProductNotFoundException("Product " + name + " does not exists!");
         return p.get(0);
     }
 
@@ -37,7 +36,7 @@ public class ProductImpl implements ProductService{
         Product p = productRepository.findOne(id);
 
         if(p == null)
-            throw new ProductDoesNotExistException("Product " + id + " does not exists!");
+            throw new ProductNotFoundException("Product not found");
         productRepository.delete(id);
         return p;
     }
@@ -51,7 +50,7 @@ public class ProductImpl implements ProductService{
     public Product findOne(Long id) {
         Product p = productRepository.findOne(id);
         if(p == null)
-            throw new ProductDoesNotExistException("Product " + id + " does not exists!");
+            throw new ProductNotFoundException("Product not found");
         return p;
     }
 }

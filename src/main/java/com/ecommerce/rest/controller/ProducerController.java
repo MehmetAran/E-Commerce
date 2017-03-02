@@ -1,7 +1,9 @@
 package com.ecommerce.rest.controller;
 
 import com.ecommerce.core.entities.Producer;
+import com.ecommerce.core.exceptions.ProducerNotFoundException;
 import com.ecommerce.core.services.ProducerService;
+import com.ecommerce.rest.exceptions.NotFoundException;
 import com.ecommerce.rest.resources.ProducerResource;
 import com.ecommerce.rest.resources.asm.ProducerResourceAsm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,16 @@ public class ProducerController {
     @RequestMapping("/{producerName}")
     public ResponseEntity<?> getProdcerByName(@PathVariable String producerName){
 
-        Producer p = producerService.findByName(producerName.toLowerCase());
-
-        ProducerResource res = new ProducerResourceAsm().toResource(p);
-
-        return new ResponseEntity<ProducerResource>(res, HttpStatus.OK);
+        try{
+            Producer p = producerService.findByName(producerName.toLowerCase());
+            ProducerResource res = new ProducerResourceAsm().toResource(p);
+            return new ResponseEntity<ProducerResource>(res, HttpStatus.OK);
+        }
+        catch (ProducerNotFoundException e){
+            throw new NotFoundException(e.getMessage());
+        }
     }
+
+    // TODO: 3/2/2017 addProducer()
 
 }

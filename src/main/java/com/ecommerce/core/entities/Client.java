@@ -41,6 +41,9 @@ public class Client {
     @Email
     private String email;
 
+    @Column(name = "role")
+    private String role;
+
     public Long getId() {
         return id;
     }
@@ -111,5 +114,13 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

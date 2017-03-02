@@ -27,6 +27,7 @@ public class ClientResourceAsm extends ResourceAssemblerSupport<Client, ClientRe
         res.setName(client.getName());
         res.setLastName(client.getLastName());
         res.setPassword(client.getPassword());
+        res.setRole(client.getRole());
 
         Link link = linkTo(ClientController.class).slash(client.getId()).withSelfRel();
         res.add(link);

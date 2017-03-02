@@ -16,6 +16,7 @@ public class ClientResource extends ResourceSupport{
     private String city;
     private String address;
     private String email;
+    private String role;
 
     public String getUsername() {
         return username;
@@ -81,6 +82,14 @@ public class ClientResource extends ResourceSupport{
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Client toClient(){
         Client c = new Client();
         c.setUsername(this.username);
@@ -91,6 +100,7 @@ public class ClientResource extends ResourceSupport{
         c.setCity(this.city);
         c.setEmail(this.email);
         c.setCountry(this.country);
+        c.setRole(this.role);
 
         return c;
     }

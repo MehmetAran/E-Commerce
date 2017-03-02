@@ -3,6 +3,7 @@ package com.ecommerce.core.services.impl;
 import com.ecommerce.core.entities.Producer;
 import com.ecommerce.core.exceptions.CategoryExistsException;
 import com.ecommerce.core.exceptions.ProducerExistsException;
+import com.ecommerce.core.exceptions.ProducerNotFoundException;
 import com.ecommerce.core.repositories.ProducerRepository;
 import com.ecommerce.core.services.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public Producer delete(Producer p) {
+        if(producerRepository.findByName(p.getName()) == null)
+            throw new ProducerNotFoundException("Producer not found");
         producerRepository.delete(p.getId());
         return p;
     }
@@ -36,12 +39,16 @@ public class ProducerServiceImpl implements ProducerService {
     @Override
     public Producer findByName(String p) {
         List<Producer> producers = producerRepository.findByName(p);
+        if(producers.get(0) == null)
+            throw new ProducerNotFoundException("Producer not found");
         return producers.get(0);
     }
 
     @Override
     public Producer findById(Long id) {
         Producer p = producerRepository.findOne(id);
+        if (p == null)
+            throw new ProducerNotFoundException("Producer not found");
         return p;
     }
 }

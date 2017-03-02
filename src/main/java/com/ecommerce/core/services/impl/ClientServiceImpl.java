@@ -1,7 +1,7 @@
 package com.ecommerce.core.services.impl;
 
 import com.ecommerce.core.entities.Client;
-import com.ecommerce.core.exceptions.ClientDoesNotExistException;
+import com.ecommerce.core.exceptions.ClientNotFoundException;
 import com.ecommerce.core.exceptions.ClientExistsException;
 import com.ecommerce.core.repositories.ClientRepository;
 import com.ecommerce.core.services.ClientService;
@@ -21,8 +21,9 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client findByUsername(String username) {
-        System.out.println("USERI " + username);
-        return clientRepository.findByUsername(username);
+        Client c = clientRepository.findByUsername(username);
+        if (c == null) throw new ClientNotFoundException("Client not found");
+        return c;
     }
 
     @Override
@@ -34,22 +35,26 @@ public class ClientServiceImpl implements ClientService {
     public Client delete(Long id) {
         Client c = clientRepository.findOne(id);
         if ( c == null)
-            throw new ClientDoesNotExistException("Client: " + id + " does not exists!");
+            throw new ClientNotFoundException("Client not found");
         clientRepository.delete(id);
         return c;
     }
 
     @Override
     public Client save(Client c) {
-//        if (clientRepository.findByUsername(c.getUsername()).isEmpty())
-//            throw new ClientDoesNotExistException("Client: " + c.getId() + " does not exists!");
+
+        if(clientRepository.findByUsername(c.getUsername()) != null)
+            throw new ClientExistsException("Client with \'" + c.getUsername() + " \' username exists");
+
+        if(c.getRole() == null) c.setRole("ROLE_USER");
+
         return clientRepository.save(c);
     }
 
     @Override
     public Client findById(Long id) {
         Client client = clientRepository.findOne(id);
-        if (client == null) throw new ClientDoesNotExistException("Client: " + id + " does not exists!");
+        if (client == null) throw new ClientNotFoundException("Client not found");
         return client;
     }
 }

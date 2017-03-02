@@ -2,7 +2,8 @@ package com.ecommerce.core.services.impl;
 
 import com.ecommerce.core.entities.Client;
 import com.ecommerce.core.entities.Order;
-import com.ecommerce.core.exceptions.ClientDoesNotExistException;
+import com.ecommerce.core.exceptions.ClientNotFoundException;
+import com.ecommerce.core.exceptions.OrderNotFoundException;
 import com.ecommerce.core.repositories.ClientRepository;
 import com.ecommerce.core.repositories.OrderRepository;
 import com.ecommerce.core.services.OrderService;
@@ -27,17 +28,20 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findOrdersByClient(Long id) {
         Client c = clientRepository.findOne(id);
         if(c == null)
-            throw new ClientDoesNotExistException("This client does not exists!");
+            throw new ClientNotFoundException("This client does not exists!");
         return orderRepository.findOrdersByClient(id);
     }
 
     @Override
     public List<Order> findAll() {
-        return null;
+        List<Order> orders = orderRepository.findAll();
+        return orders;
     }
 
     @Override
     public Order findOne(Long id) {
+        Order o = orderRepository.findOne(id);
+        if(o == null) throw new OrderNotFoundException("Order not found");
         return orderRepository.findOne(id);
     }
 
