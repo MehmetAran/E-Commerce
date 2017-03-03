@@ -1,6 +1,7 @@
 package com.ecommerce.core.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by gennt on 2/23/2017.
@@ -15,6 +16,7 @@ public class Category {
     private Long id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     public Long getId() {

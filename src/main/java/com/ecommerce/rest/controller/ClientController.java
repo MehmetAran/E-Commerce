@@ -3,6 +3,7 @@ package com.ecommerce.rest.controller;
 import com.ecommerce.core.entities.Client;
 import com.ecommerce.core.entities.Order;
 import com.ecommerce.core.entities.Product;
+import com.ecommerce.core.exceptions.ClientExistsException;
 import com.ecommerce.core.exceptions.ClientNotFoundException;
 import com.ecommerce.core.services.ClientService;
 import com.ecommerce.core.services.OrderService;
@@ -24,10 +25,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -62,8 +60,6 @@ public class ClientController {
         if(currentClient.getId() != clientId)
             throw new AccessDeniedException("Access Denied");
     }
-
-    // TODO: 3/2/2017 createClient()
     
     @RequestMapping("/{clientId}/orders")
     public ResponseEntity<OrderList> getClientOrders(@PathVariable  Long clientId){
@@ -106,7 +102,7 @@ public class ClientController {
 
         OrderResource res = new OrderResourceAsm().toResource(createdOrder);
 
-        return new ResponseEntity<OrderResource>(res, HttpStatus.OK);
+        return new ResponseEntity<OrderResource>(res, HttpStatus.CREATED);
     }
 
 

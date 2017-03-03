@@ -1,10 +1,12 @@
 package com.ecommerce.core.services.impl;
 
 import com.ecommerce.core.entities.Producer;
+import com.ecommerce.core.entities.Product;
 import com.ecommerce.core.exceptions.CategoryExistsException;
 import com.ecommerce.core.exceptions.ProducerExistsException;
 import com.ecommerce.core.exceptions.ProducerNotFoundException;
 import com.ecommerce.core.repositories.ProducerRepository;
+import com.ecommerce.core.repositories.ProductRepository;
 import com.ecommerce.core.services.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,13 @@ public class ProducerServiceImpl implements ProducerService {
     @Autowired
     private ProducerRepository producerRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public Producer save(Producer p) {
-        List<Producer> producer = producerRepository.findByName(p.getName());
-        if(producer.isEmpty())
+        Producer producer = producerRepository.findByName(p.getName());
+        if(producer != null)
             throw new ProducerExistsException("Producer " + p.getName() + " already exists!");
         return producerRepository.save(p);
     }
@@ -38,10 +43,11 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public Producer findByName(String p) {
-        List<Producer> producers = producerRepository.findByName(p);
-        if(producers.get(0) == null)
+        Producer pr = producerRepository.findByName(p);
+        System.out.println(p);
+        if(pr == null)
             throw new ProducerNotFoundException("Producer not found");
-        return producers.get(0);
+        return pr;
     }
 
     @Override
@@ -50,5 +56,15 @@ public class ProducerServiceImpl implements ProducerService {
         if (p == null)
             throw new ProducerNotFoundException("Producer not found");
         return p;
+    }
+
+
+    @Override
+    public List<Product> findProductsByProducer(String producerName) {
+
+        Producer producer = this.findByName(producerName);
+
+        List<Product> products = productRepository.findProductByProducer(producer);
+        return products;
     }
 }

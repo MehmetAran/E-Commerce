@@ -3,6 +3,7 @@ package com.ecommerce.core.entities;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,15 +20,18 @@ public class Order {
     private Long id;
 
     @ManyToOne
+    @NotNull
     private Client client;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "product_order", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+    @NotNull
     private java.util.Set<Product> product;
 
     @Column(name = "date")
     @DateTimeFormat
+    @NotNull
     private Date date;
 
     public Long getId() {

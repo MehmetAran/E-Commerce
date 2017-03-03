@@ -3,6 +3,7 @@ package com.ecommerce.core.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -25,9 +26,11 @@ public class Product {
     private Producer producer;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "price")
+    @NotNull
     private double price;
 
     @Column(name = "description")

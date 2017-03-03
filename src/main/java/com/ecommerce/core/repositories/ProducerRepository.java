@@ -15,5 +15,5 @@ public interface ProducerRepository extends CrudRepository<Producer, Long>{
     public Producer save(Producer c);
     public void delete(Producer c);
     public Producer findOne(Long id);
-    public List<Producer> findByName(@Param("name") String name);
+    public Producer findByName(@Param("name") String name);
 }

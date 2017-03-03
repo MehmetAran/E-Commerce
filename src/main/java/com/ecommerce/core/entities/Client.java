@@ -3,6 +3,7 @@ package com.ecommerce.core.entities;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by gennt on 2/23/2017.
@@ -17,28 +18,36 @@ public class Client {
     private Long id;
 
     @Column(name = "username")
+    @NotNull
     private String username;
 
     @Column(name = "password")
+    @NotNull
     private String password;
 
     @Column(name = "name")
+    @NotNull
     private String name;
 
     @Column(name = "lastName")
+    @NotNull
     private String lastName;
 
     @Column(name = "country")
+    @NotNull
     private String country;
 
     @Column(name = "city")
+    @NotNull
     private String city;
 
     @Column(name = "address")
+    @NotNull
     private String address;
 
     @Column(name = "email")
     @Email
+    @NotNull
     private String email;
 
     @Column(name = "role")

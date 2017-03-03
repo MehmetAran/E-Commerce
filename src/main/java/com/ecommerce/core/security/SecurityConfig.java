@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.sql.DataSource;
 
@@ -27,14 +28,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private ClientService clientService;
 
+    private String[] fullyAuthenticatedUri = {"/api/client/**", "/api/category/**",
+                                                "/api/order/**", "/api/producer/**"};
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .formLogin()
+                .and()
                     .httpBasic()
                 .and().rememberMe().disable()
                 .authorizeRequests()
-                    .antMatchers("/api/client/**")
+                    .antMatchers(fullyAuthenticatedUri)
                         .fullyAuthenticated();
     }
 
