@@ -44,26 +44,26 @@ id = [integer]
 - Code: 401 Unauthorized
 - Content
     ```
-    {
-        "timestamp": 1499856909468,
-        "status": 401,
-        "error": "Unauthorized",
-        "message": "Client not found",
-        "path": "/api/client/1"
-    }
+      {
+          "timestamp": 1499856909468,
+          "status": 401,
+          "error": "Unauthorized",
+          "message": "Client not found",
+          "path": "/api/client/1"
+      }
     ```
         
 - Code: 403 Forbidden
 - Content
     ```
-    {
-        "timestamp": 1499857022629,
-        "status": 403,
-        "error": "Forbidden",
-        "exception": "org.springframework.security.access.AccessDeniedException",
-        "message": "Access Denied",
-        "path": "/api/client/22"
-    }
+      {
+          "timestamp": 1499857022629,
+          "status": 403,
+          "error": "Forbidden",
+          "exception": "org.springframework.security.access.AccessDeniedException",
+          "message": "Access Denied",
+          "path": "/api/client/22"
+      }
     ```
     
     
@@ -78,33 +78,33 @@ id = [integer]
   POST
 * <b>Url Params</b>
 ```
-producer = [String]
-category = [String]
+  producer = [String]
+  category = [String]
 ```
 * <b>Data Params</b>
 ```
-sentProduct = [ProductResource]
+  sentProduct = [ProductResource]
 ```
 * <b>Success response:</b> 
   - Code: 201 CREATED
   - Content
   ```
-  {
-    "name": "Syza",
-    "price": 120,
-    "description": "Syza",
-    "_links": {
-        "self": {
-            "href": "http://localhost:8080/api/product/7"
-        },
-        "category": {
-            "href": "http://localhost:8080/api/category/kategori2"
-        },
-        "producer": {
-            "href": "http://localhost:8080/api/producer/Nike"
-        }
+    {
+      "name": "Syza",
+      "price": 120,
+      "description": "Syza",
+      "_links": {
+          "self": {
+              "href": "http://localhost:8080/api/product/7"
+          },
+          "category": {
+              "href": "http://localhost:8080/api/category/kategori2"
+          },
+          "producer": {
+              "href": "http://localhost:8080/api/producer/Nike"
+          }
+      }
     }
-  }
  ``` ``` ``` 
  
  
@@ -112,14 +112,14 @@ sentProduct = [ProductResource]
 - Code: 500 Internal Server Error
 - Content
     ```
-    {
-        "timestamp": 1499857880178,
-        "status": 500,
-        "error": "Internal Server Error",
-        "exception": "com.ecommerce.core.exceptions.CategoryNotFoundException",
-        "message": "Category not found",
-        "path": "/api/product"
-    }
+      {
+          "timestamp": 1499857880178,
+          "status": 500,
+          "error": "Internal Server Error",
+          "exception": "com.ecommerce.core.exceptions.CategoryNotFoundException",
+          "message": "Category not found",
+          "path": "/api/product"
+      }
     ```
   
     
@@ -131,51 +131,52 @@ sentProduct = [ProductResource]
   PUT
 * <b>Url Params</b>
 ```
-categoryName = [String]
+  categoryName = [String]
 ```
 
 * <b>Data Params</b>
 ```
-sentCategory = [CategoryResource]
+  sentCategory = [CategoryResource]
 ```
 
 * <b>Success response:</b> 
   - Code: 200 OK
   - Content
   ```
-  {
-    "name": "kategori2Updated",
-    "_links": {
-        "self": {
-            "href": "http://localhost:8080/api/category/kategori2Updated"
+    {
+      "name": "kategori2Updated",
+      "_links": {
+          "self": {
+              "href": "http://localhost:8080/api/category/kategori2Updated"
+          }
         }
-    }
-}
-  ```
+      }
+  ``` 
+  
 * <b>Error response:</b> 
 - Code: 401 Unauthorized
 - Content
     ```
-    {
-        "timestamp": 1499858451800,
-        "status": 401,
-        "error": "Unauthorized",
-        "message": "Bad credentials",
-        "path": "/api/category/kategori2333"
-    }
+      {
+          "timestamp": 1499858451800,
+          "status": 401,
+          "error": "Unauthorized",
+          "message": "Bad credentials",
+          "path": "/api/category/kategori2333"
+      }
     ```
         
 - Code: 403 Forbidden
 - Content
     ```
-    {
-        "timestamp": 1499858513440,
-        "status": 403,
-        "error": "Forbidden",
-        "exception": "org.springframework.security.access.AccessDeniedException",
-        "message": "Access is denied",
-        "path": "/api/category/kategori2"
-    }
+      {
+          "timestamp": 1499858513440,
+          "status": 403,
+          "error": "Forbidden",
+          "exception": "org.springframework.security.access.AccessDeniedException",
+          "message": "Access is denied",
+          "path": "/api/category/kategori2"
+      }
     ```
     
     
